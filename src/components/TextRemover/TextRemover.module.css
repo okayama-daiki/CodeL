@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+}
+
+.containerHeader {
+  width: 100%;
+  height: 56px;
+  border: 1px solid #dae1e8;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom: none;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,30 @@
+.field {
+  width: 90%;
+  height: 90%;
+  resize: none;
+  font-size: 1.3rem;
+  margin: 5%;
+  border: none;
+  font-family: "Source Code Pro";
+  line-height: 2rem;
+}
+
+.field textarea:focus {
+  outline: none;
+}
+
+.leftBox {
+  background-color: white;
+  flex: 1;
+  width: 100%;
+  min-height: clamp(250px, 50vh, 557px);
+  border: 1px solid #dae1e8;
+  border-bottom-left-radius: 0.5rem;
+  border-right: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.leftBox:focus-within {
+  border-right: 0.1px solid rgb(47, 125, 215);
+  outline: 0.5px solid rgb(47, 125, 215);
+}

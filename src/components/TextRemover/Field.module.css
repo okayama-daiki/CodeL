@@ -1,0 +1,10 @@
+.field {
+  width: 100%;
+  min-height: clamp(250px, 50vh, 557px);
+  resize: none;
+  border-bottom-left-radius: 10px;
+}
+
+.field:focus {
+  outline: none;
+}
