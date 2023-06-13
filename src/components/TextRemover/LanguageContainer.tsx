@@ -31,16 +31,15 @@ export default function LanguageContainer({
   userChosen,
   handleSelectedLanguageChange,
 }: LanguageContainerProps) {
+  console.log(language);
   return (
     <div className={style.languageContainer}>
       <button className={style.button}>
         <label htmlFor="language-select">
           <span className={style.language}>
-            <strong>
-              {language !== undefined ? language : "Detect language"}
-            </strong>
+            <strong>{language !== "" ? language : "Detect language"}</strong>
             <span className={style.detected}>
-              {language === undefined || userChosen ? "" : "(detected)"}
+              {language === "" || userChosen ? "" : "(detected)"}
             </span>
           </span>
         </label>

@@ -7,7 +7,7 @@ import style from "./TextRemover.module.css";
 function TextRemover() {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
-  const [language, setLanguage] = useState("javascript");
+  const [language, setLanguage] = useState("");
   const [userChosen, setUserChosen] = useState(false);
 
   const handleInputTextChange = async (inputText: string) => {

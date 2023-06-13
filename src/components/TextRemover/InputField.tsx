@@ -1,9 +1,4 @@
 import Editor from "react-simple-code-editor";
-// import { highlight, languages } from "prismjs";
-// import "prismjs/components/prism-clike";
-// import "prismjs/components/prism-javascript";
-// import "prismjs/components/prism-python";
-// import "prismjs/themes/prism.css"; //Example style, you can use another
 import hljs from "highlight.js";
 import "highlight.js/styles/xcode.css";
 import style from "./InputField.module.css";
@@ -47,7 +42,7 @@ function InputField({
         value={inputText}
         onValueChange={(text) => {
           const highlightedCode = hljs.highlightAuto(text, languageCandidates);
-          handleSelectedLanguageChange(highlightedCode.language as string);
+          handleSelectedLanguageChange(highlightedCode.language || "");
           handleInputTextChange(text);
         }}
         highlight={(code) =>
