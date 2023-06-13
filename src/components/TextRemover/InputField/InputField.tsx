@@ -28,6 +28,7 @@ interface InputTextFieldProps {
   handleInputTextChange: (inputText: string) => void;
   language: string;
   handleSelectedLanguageChange: (language: string) => void;
+  handleTranslate: () => void;
 }
 
 function InputField({
@@ -35,6 +36,7 @@ function InputField({
   handleInputTextChange,
   language,
   handleSelectedLanguageChange,
+  handleTranslate,
 }: InputTextFieldProps) {
   return (
     <div className={style.leftBox}>
@@ -44,6 +46,12 @@ function InputField({
           const highlightedCode = hljs.highlightAuto(text, languageCandidates);
           handleSelectedLanguageChange(highlightedCode.language || "");
           handleInputTextChange(text);
+        }}
+        onKeyDown={(e) => {
+          if (e.ctrlKey && e.key === "Enter") {
+            e.preventDefault();
+            handleTranslate();
+          }
         }}
         highlight={(code) =>
           hljs.highlight(language ? language : "javascript", code).value

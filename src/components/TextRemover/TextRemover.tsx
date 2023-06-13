@@ -3,6 +3,7 @@ import OriginalLanguageContainer from "./OriginalLanguageContainer/OriginalLangu
 import TargetLanguageContainer from "./TargetLanguageContainer/TargetLanguageContainer";
 import InputField from "./InputField/InputField";
 import OutputField from "./OutputField/OutputField";
+import { translateCode } from "./translateCode";
 import style from "./TextRemover.module.css";
 
 function TextRemover() {
@@ -13,21 +14,17 @@ function TextRemover() {
   const [originalLanguageIsChosen, setOriginalLanguageIsChosen] =
     useState(false);
 
-  const handleInputTextChange = async (inputText: string) => {
+  const handleInputTextChange = (inputText: string) => {
     setInputText(inputText);
-    // try {
-    //   const response = await fetch("http://localhost:5000/remove", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ script: inputText }),
-    //   });
-    //   const data = await response.json();
-    //   setOutputText(data.text);
-    // } catch {
-    setOutputText(inputText);
-    // }
+  };
+
+  const handleTranslate = async () => {
+    const translatedCode = await translateCode(
+      inputText,
+      originalLanguage,
+      targetLanguage
+    );
+    setOutputText(translatedCode);
   };
 
   return (
@@ -50,6 +47,7 @@ function TextRemover() {
           handleInputTextChange={handleInputTextChange}
           language={originalLanguage}
           handleSelectedLanguageChange={setOriginalLanguage}
+          handleTranslate={handleTranslate}
         ></InputField>
         <OutputField
           outputText={outputText}
