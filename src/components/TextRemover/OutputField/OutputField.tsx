@@ -14,7 +14,8 @@ function OutputField({ outputText, language }: OutputTextFieldProps) {
         value={outputText}
         onValueChange={(e) => {}}
         highlight={(code) =>
-          hljs.highlight(language ? language : "javascript", code).value
+          hljs.highlight(code, { language: language ? language : "javascript" })
+            .value
         }
         onKeyDown={(e) => e.preventDefault()}
         className={style.field}

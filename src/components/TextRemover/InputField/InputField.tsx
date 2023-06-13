@@ -54,7 +54,8 @@ function InputField({
           }
         }}
         highlight={(code) =>
-          hljs.highlight(language ? language : "javascript", code).value
+          hljs.highlight(code, { language: language ? language : "javascript" })
+            .value
         }
         tabSize={2}
         insertSpaces={true}
