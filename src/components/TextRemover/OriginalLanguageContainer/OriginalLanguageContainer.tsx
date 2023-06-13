@@ -1,9 +1,11 @@
-import style from "./LanguageContainer.module.css";
+import { useState } from "react";
+import style from "./OriginalLanguageContainer.module.css";
 
-interface LanguageContainerProps {
+interface OriginalLanguageContainerProps {
   language: string;
   userChosen: boolean;
   handleSelectedLanguageChange: (language: string) => void;
+  handleOriginalLanguageIsChosen: (isChosen: boolean) => void;
 }
 
 const languageCandidates = [
@@ -26,15 +28,19 @@ const languageCandidates = [
   "r",
 ];
 
-export default function LanguageContainer({
+export default function OriginalLanguageContainer({
   language,
   userChosen,
   handleSelectedLanguageChange,
-}: LanguageContainerProps) {
-  console.log(language);
+  handleOriginalLanguageIsChosen,
+}: OriginalLanguageContainerProps) {
+  const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
   return (
     <div className={style.languageContainer}>
-      <button className={style.button}>
+      <button
+        className={style.button}
+        onClick={() => setIsLanguageSelectOpen(!isLanguageSelectOpen)}
+      >
         <label htmlFor="language-select">
           <span className={style.language}>
             <strong>{language !== "" ? language : "Detect language"}</strong>
@@ -51,6 +57,10 @@ export default function LanguageContainer({
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           className={style.icon}
+          style={{
+            transition: "transform 0.1s",
+            transform: isLanguageSelectOpen ? "rotate(180deg)" : "rotate(0)",
+          }}
         >
           <path
             d="M19 9L12 16L5 9"
@@ -61,16 +71,24 @@ export default function LanguageContainer({
           ></path>
         </svg>
       </button>
-      <select
-        value={language}
-        onChange={(e) => handleSelectedLanguageChange(e.target.value)}
-        id="language-select"
-        className={style.select}
-      >
-        {languageCandidates.map((language) => (
-          <option value={language}>{language}</option>
-        ))}
-      </select>
+
+      {isLanguageSelectOpen && (
+        <div className={style.dropdown}>
+          {languageCandidates.map((lang) => (
+            <div
+              className={style.dropdownItem}
+              key={lang}
+              onClick={() => {
+                handleSelectedLanguageChange(lang);
+                setIsLanguageSelectOpen(false);
+                handleOriginalLanguageIsChosen(true);
+              }}
+            >
+              {lang}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
