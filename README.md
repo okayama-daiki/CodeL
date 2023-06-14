@@ -16,8 +16,7 @@ demo: coming soon...
 ## Installation
 
 ```bash
-git clone https://github.com/dike-okayama/CodeL.git
-cd CodeL
+git clone https://github.com/dike-okayama/CodeL.git && cd CodeL
 ```
 
 ## Usage
@@ -30,6 +29,7 @@ echo 'REACT_APP_OPENAI_API_KEY=Your_API_key' > .env
 ```
 
 > **Note**
+>
 > If you want to set your own environment variable names, prefix them with `REACT_APP_`. This depends on create-react-app's specification for environment variables.
 
 3. Install the necessary packages and launch the application.
@@ -39,6 +39,7 @@ npm install && npm start
 ```
 
 > **Warning**
+>
 > Please check the amount of API usage from [this site](https://platform.openai.com/account/usage) accordingly.
 
 ## Author
