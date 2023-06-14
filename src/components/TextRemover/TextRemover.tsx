@@ -13,18 +13,21 @@ function TextRemover() {
   const [targetLanguage, setTargetLanguage] = useState("");
   const [originalLanguageIsChosen, setOriginalLanguageIsChosen] =
     useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
 
   const handleInputTextChange = (inputText: string) => {
     setInputText(inputText);
   };
 
   const handleTranslate = async () => {
+    setIsTranslating(true);
     const translatedCode = await translateCode(
       inputText,
       originalLanguage,
       targetLanguage
     );
     setOutputText(translatedCode);
+    setIsTranslating(false);
   };
 
   return (
@@ -52,6 +55,7 @@ function TextRemover() {
         <OutputField
           outputText={outputText}
           language={targetLanguage}
+          isTranslating={isTranslating}
         ></OutputField>
       </div>
     </>

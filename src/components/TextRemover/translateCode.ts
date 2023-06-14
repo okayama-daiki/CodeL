@@ -22,12 +22,17 @@ const translateCode = async (
     }),
   });
   const json = await response.json();
-  const res: string = json?.choices[0].message.content;
+  let res: string = json?.choices[0].message.content;
   if (res.startsWith("`")) {
-    return res.slice(3, -3);
-  } else {
-    return res;
+    res = res.slice(3, -3);
   }
+  if (res.startsWith(targetLanguage)) {
+    res = res.slice(targetLanguage.length);
+  }
+  if (res.startsWith("\n")) {
+    res = res.slice(1);
+  }
+  return res;
 };
 
 function createPrompt(
