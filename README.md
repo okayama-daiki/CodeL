@@ -6,7 +6,7 @@ CodeL is a translation application between programming languages using the GPT-3
 
 ![overview](image.png)
 
-demo: coming soon...
+demo: [https://codel.uoh-dakken.com/](https://codel.uoh-dakken.com/)
 
 ## Features
 
