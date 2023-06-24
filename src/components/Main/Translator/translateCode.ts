@@ -66,9 +66,7 @@ function createPrompt(
   - I expect a code only response.
   - The code should be formatted. (follows google style guide)
   - The code must be executable.
-  \`\`\`
   ${code}
-  \`\`\`
   `;
 }
 

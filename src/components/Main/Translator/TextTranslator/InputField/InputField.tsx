@@ -1,23 +1,25 @@
 import Editor from "react-simple-code-editor";
 import hljs from "highlight.js";
 import "highlight.js/styles/xcode.css";
-import { languageCandidates } from "../translateCode";
+import { languageCandidates } from "../../translateCode";
 import style from "./InputField.module.css";
 
 interface InputTextFieldProps {
   inputText: string;
   handleInputTextChange: (inputText: string) => void;
-  language: string;
+  originalLanguage: string;
   handleSelectedLanguageChange: (language: string) => void;
   handleTranslate: () => void;
+  originalLanguageIsFixed: boolean;
 }
 
-function InputField({
+export default function InputField({
   inputText,
   handleInputTextChange,
-  language,
+  originalLanguage,
   handleSelectedLanguageChange,
   handleTranslate,
+  originalLanguageIsFixed,
 }: InputTextFieldProps) {
   return (
     <div className={style.leftBox}>
@@ -25,7 +27,9 @@ function InputField({
         value={inputText}
         onValueChange={(text) => {
           const highlightedCode = hljs.highlightAuto(text, languageCandidates);
-          handleSelectedLanguageChange(highlightedCode.language || "");
+          if (!originalLanguageIsFixed) {
+            handleSelectedLanguageChange(highlightedCode.language || "");
+          }
           handleInputTextChange(text);
         }}
         onKeyDown={(e) => {
@@ -35,8 +39,9 @@ function InputField({
           }
         }}
         highlight={(code) =>
-          hljs.highlight(code, { language: language ? language : "javascript" })
-            .value
+          hljs.highlight(code, {
+            language: originalLanguage ? originalLanguage : "javascript",
+          }).value
         }
         tabSize={2}
         insertSpaces={true}
@@ -46,5 +51,3 @@ function InputField({
     </div>
   );
 }
-
-export default InputField;

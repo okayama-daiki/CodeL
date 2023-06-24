@@ -5,13 +5,13 @@ import style from "./OutputField.module.css";
 
 interface OutputTextFieldProps {
   outputText: string;
-  language: string;
+  targetLanguage: string;
   isTranslating: boolean;
 }
 
 function OutputField({
   outputText,
-  language,
+  targetLanguage,
   isTranslating,
 }: OutputTextFieldProps) {
   return (
@@ -20,8 +20,9 @@ function OutputField({
         value={outputText}
         onValueChange={(e) => {}}
         highlight={(code) =>
-          hljs.highlight(code, { language: language ? language : "javascript" })
-            .value
+          hljs.highlight(code, {
+            language: targetLanguage ? targetLanguage : "javascript",
+          }).value
         }
         onKeyDown={(e) => e.preventDefault()}
         className={style.field}

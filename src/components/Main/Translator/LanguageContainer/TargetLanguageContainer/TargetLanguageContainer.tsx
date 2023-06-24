@@ -1,6 +1,6 @@
 import { useState } from "react";
 import style from "./TargetLanguageContainer.module.css";
-import { languageCandidates } from "../translateCode";
+import { languageCandidates } from "../../translateCode";
 interface TargetLanguageContainerProps {
   language: string;
   handleSelectedLanguageChange: (language: string) => void;

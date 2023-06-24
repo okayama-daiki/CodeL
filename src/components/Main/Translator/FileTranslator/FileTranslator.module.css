@@ -1,0 +1,9 @@
+.container {
+  width: 99.8%;
+  height: clamp(250px, 50vh, 557px);
+  background-color: white;
+  border: 1px solid #dae1e8;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
