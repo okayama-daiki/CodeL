@@ -1,35 +1,20 @@
 import { useState } from "react";
-import style from "./TargetLanguageContainer.module.css";
+import style from "./OriginalLanguageContainer.module.css";
+import { languageCandidates } from "../translateCode";
 
-interface TargetLanguageContainerProps {
+interface OriginalLanguageContainerProps {
   language: string;
+  userChosen: boolean;
   handleSelectedLanguageChange: (language: string) => void;
+  handleOriginalLanguageIsChosen: (isChosen: boolean) => void;
 }
 
-const languageCandidates = [
-  "javascript",
-  "python",
-  "java",
-  "c",
-  "c++",
-  "c#",
-  "go",
-  "ruby",
-  "rust",
-  "swift",
-  "kotlin",
-  "php",
-  "typescript",
-  "dart",
-  "scala",
-  "haskell",
-  "r",
-];
-
-export default function TargetLanguageContainer({
+export default function OriginalLanguageContainer({
   language,
+  userChosen,
   handleSelectedLanguageChange,
-}: TargetLanguageContainerProps) {
+  handleOriginalLanguageIsChosen,
+}: OriginalLanguageContainerProps) {
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
   return (
     <div className={style.languageContainer}>
@@ -39,11 +24,10 @@ export default function TargetLanguageContainer({
       >
         <label htmlFor="language-select">
           <span className={style.language}>
-            <strong>
-              {!isLanguageSelectOpen && language !== ""
-                ? language
-                : "Select target language"}
-            </strong>
+            <strong>{language !== "" ? language : "Detect language"}</strong>
+            <span className={style.detected}>
+              {language === "" || userChosen ? "" : "(detected)"}
+            </span>
           </span>
         </label>
         <svg
@@ -68,6 +52,7 @@ export default function TargetLanguageContainer({
           ></path>
         </svg>
       </button>
+
       {isLanguageSelectOpen && (
         <div className={style.dropdown}>
           {languageCandidates.map((lang) => (
@@ -77,6 +62,7 @@ export default function TargetLanguageContainer({
               onClick={() => {
                 handleSelectedLanguageChange(lang);
                 setIsLanguageSelectOpen(false);
+                handleOriginalLanguageIsChosen(true);
               }}
             >
               {lang}

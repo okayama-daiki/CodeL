@@ -6,7 +6,7 @@ import OutputField from "./OutputField/OutputField";
 import { translateCode } from "./translateCode";
 import style from "./TextRemover.module.css";
 
-function TextRemover() {
+export default function TextTranslator() {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const [originalLanguage, setOriginalLanguage] = useState("");
@@ -61,5 +61,3 @@ function TextRemover() {
     </>
   );
 }
-
-export default TextRemover;

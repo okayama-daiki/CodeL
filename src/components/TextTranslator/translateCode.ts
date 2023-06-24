@@ -1,5 +1,25 @@
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
 
+const languageCandidates = [
+  "javascript",
+  "python",
+  "java",
+  "c",
+  "c++",
+  "c#",
+  "go",
+  "ruby",
+  "rust",
+  "swift",
+  "kotlin",
+  "php",
+  "typescript",
+  "dart",
+  "scala",
+  "haskell",
+  "r",
+];
+
 const translateCode = async (
   code: string,
   originalLanguage: string,
@@ -38,16 +58,18 @@ const translateCode = async (
 function createPrompt(
   code: string,
   targetLanguage: string,
-  originalLanguage: string | null = null
+  originalLanguage: string
 ): string {
   return `Translate into ${targetLanguage}${
     originalLanguage != null ? " from" + originalLanguage : ""
   } code below.
-  I expect a code only response.
+  - I expect a code only response.
+  - The code should be formatted. (follows google style guide)
+  - The code must be executable.
   \`\`\`
   ${code}
   \`\`\`
   `;
 }
 
-export { translateCode };
+export { translateCode, languageCandidates };
