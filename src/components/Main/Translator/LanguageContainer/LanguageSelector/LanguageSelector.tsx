@@ -3,13 +3,19 @@ import style from "./LanguageSelector.module.css";
 import { languageCandidates } from "../../translateCode";
 
 interface TargetLanguageContainerProps {
+  defaultMessage: string;
   selectedLanguage: string;
   handleSelectedLanguageChange: (language: string) => void;
+  selectedLanguageIsFixed?: boolean;
+  setSelectedLanguageIsFixed?: (isFixed: boolean) => void;
 }
 
 export default function LanguageSelector({
-  selectedLanguage: language,
+  defaultMessage,
+  selectedLanguage,
   handleSelectedLanguageChange,
+  selectedLanguageIsFixed = true,
+  setSelectedLanguageIsFixed = () => {},
 }: TargetLanguageContainerProps) {
   const [isLanguageSelectOpen, setIsLanguageSelectOpen] = useState(false);
   return (
@@ -21,9 +27,11 @@ export default function LanguageSelector({
         <label htmlFor="language-select">
           <span className={style.language}>
             <strong>
-              {!isLanguageSelectOpen && language !== ""
-                ? language
-                : "Select target language"}
+              {!isLanguageSelectOpen && selectedLanguage !== ""
+                ? selectedLanguageIsFixed
+                  ? selectedLanguage
+                  : `${selectedLanguage} (detected)`
+                : defaultMessage}
             </strong>
           </span>
         </label>
@@ -56,6 +64,7 @@ export default function LanguageSelector({
               className={style.dropdownItem}
               key={lang}
               onClick={() => {
+                setSelectedLanguageIsFixed(true);
                 handleSelectedLanguageChange(lang);
                 setIsLanguageSelectOpen(false);
               }}

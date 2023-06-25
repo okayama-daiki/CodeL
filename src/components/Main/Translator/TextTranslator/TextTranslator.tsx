@@ -7,8 +7,8 @@ import style from "./TextTranslator.module.css";
 interface TextTranslatorProps {
   originalLanguage: string;
   setOriginalLanguage: (language: string) => void;
-  originalLanguageIsFixed: boolean;
   targetLanguage: string;
+  originalLanguageIsFixed: boolean;
 }
 
 export default function TextTranslator({
